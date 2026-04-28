@@ -1,0 +1,302 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Cotefacil - avaliação
+meta:
+  id: wrk_6694d7ca7e87485689975c3443aa9f03
+  created: 1777399414708
+  modified: 1777409661070
+  description: ""
+collection:
+  - url: http://localhost:8080/auth/login
+    name: Login
+    meta:
+      id: req_0456bf5487c84992b231ca71b6877700
+      created: 1777399419830
+      modified: 1777408871509
+      isPrivate: false
+      description: ""
+      sortKey: -1777399419830
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+           "username":"usuario",
+           "password":"Senha@123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders
+    name: Get Orders
+    meta:
+      id: req_4a256a12cb674cb888009a97a9c78943
+      created: 1777399489736
+      modified: 1777409724150
+      isPrivate: false
+      description: ""
+      sortKey: -1777399437306.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders/1
+    name: Get Order
+    meta:
+      id: req_883800a60e70441b920d7f4d95419ae8
+      created: 1777399517397
+      modified: 1777409669325
+      isPrivate: false
+      description: ""
+      sortKey: -1777399454783
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders
+    name: Create Order
+    meta:
+      id: req_9f951081574a47038c5ff8525f5a5c9b
+      created: 1777399527557
+      modified: 1777409671573
+      isPrivate: false
+      description: ""
+      sortKey: -1777399459152.125
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+           "customerName":"Cliente teste 2",
+           "customerEmail":"cliente@teste.com",
+           "orderDate":"02/12/2025 10:30:00",
+           "status":"PENDING",
+           "items":[
+              {
+                 "productName":"Produto E",
+                 "quantity":1,
+                 "unitPrice":10.50,
+                 "subtotal":21.00
+              },
+              {
+                 "productName":"Produto F",
+                 "quantity":1,
+                 "unitPrice":50.00,
+                 "subtotal":50.00
+              }
+           ],
+           "totalAmount":71.00
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders/1
+    name: Update Order
+    meta:
+      id: req_88916766e30e4757982ff4ff8951e3f7
+      created: 1777399731049
+      modified: 1777409674081
+      isPrivate: false
+      description: ""
+      sortKey: -1777399461336.6875
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+           "customerName":"Cliente Teste edit",
+           "customerEmail":"cliente@teste.com",
+           "orderDate":"02/12/2025 10:30:00",
+           "status":"PENDING",
+           "items":[
+              {
+                 "productName":"Produto A EDIT",
+                 "quantity":2,
+                 "unitPrice":10.50,
+                 "subtotal":21.00
+              }
+           ],
+           "totalAmount":71.00
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders/1
+    name: Delete Order
+    meta:
+      id: req_71ef1f47dec2410f9e6b5ccb64efd3a7
+      created: 1777399764351
+      modified: 1777409675992
+      isPrivate: false
+      description: ""
+      sortKey: -1777399462428.9688
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders/1/items
+    name: Get Orders Items
+    meta:
+      id: req_35afa5d4993b469fac5d339049dc8ff3
+      created: 1777399811329
+      modified: 1777409677744
+      isPrivate: false
+      description: ""
+      sortKey: -1777399462975.1094
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/api/orders/1/items
+    name: Add Orders Items
+    meta:
+      id: req_e65f8946a94544be8007b09122a5946d
+      created: 1777399850419
+      modified: 1777409679812
+      isPrivate: false
+      description: ""
+      sortKey: -1777399463521.25
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+           "productName":"Produto B",
+           "quantity":2,
+           "unitPrice":10.50,
+           "subtotal":21.00
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{ _.TOKEN }}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_cb5eefee1bce5e7deb74baece6591b201239b9bf
+    created: 1777399414712
+    modified: 1777399414712
+environments:
+  name: Base Environment
+  meta:
+    id: env_cb5eefee1bce5e7deb74baece6591b201239b9bf
+    created: 1777399414711
+    modified: 1777409734441
+    isPrivate: false
+  data:
+    TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJici5jb20uY290ZWZhY2lsX2FwaTEiLCJzdWIiOiJ1c3VhcmlvIiwiYXVkIjpbImJhY2tlbmQtY2xpZW50cyJdLCJpZCI6MSwidXNlcm5hbWUiOiJ1c3VhcmlvIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc3NzQwOTcyOCwiZXhwIjoxNzc3NDEzMzI4fQ.uOdlu6WeRn6j4ka7N_90q5BoN0uge3i2irREKm5j8Pg

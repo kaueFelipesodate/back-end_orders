@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cotefacil-postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api2:
+    build:
+      context: ./cotefacil_api2
+      dockerfile: Dockerfile
+    container_name: cotefacil-api2
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 8081
+      DB_URL: jdbc:postgresql://postgres:5432/postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: ZHVtbXktc2VjcmV0LWtleS0zMmJ5dGVzLWZvci1jb3RlZmFjaWw=
+      JWT_EXPIRATION: 3600000
+      JWT_ISSUER: br.com.cotefacil_api1
+      JWT_AUDIENCE: backend-clients
+    ports:
+      - "8081:8081"
+
+  api1:
+    build:
+      context: ./cotefacil_api1
+      dockerfile: Dockerfile
+    container_name: cotefacil-api1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      api2:
+        condition: service_started
+    environment:
+      PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: ZHVtbXktc2VjcmV0LWtleS0zMmJ5dGVzLWZvci1jb3RlZmFjaWw=
+      JWT_EXPIRATION: 3600000
+      JWT_ISSUER: br.com.cotefacil_api1
+      JWT_AUDIENCE: backend-clients
+      CORS_ALLOWED_ORIGINS: http://localhost:3000
+      LOGIN_RATE_LIMIT_PER_MINUTE: 10
+      API2_BASE_URL: http://api2:8081
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

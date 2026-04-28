@@ -1,0 +1,115 @@
+package br.com.cotefacil_api1.shared.web.responses;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(description = "Envelope padrao de resposta da API 1")
+public class Response {
+
+    @Schema(description = "Momento da resposta")
+    private Instant timestamp;
+
+    @Schema(description = "Codigo HTTP")
+    private int status;
+
+    @Schema(description = "Tipo de erro")
+    private String error;
+
+    @Schema(description = "Mensagem da resposta")
+    private String message;
+
+    @Schema(description = "Caminho da requisicao")
+    private String path;
+
+    @Schema(description = "Erros de validacao")
+    private Map<String, String> errors = new HashMap<>();
+
+    @Schema(description = "Dados retornados")
+    private Object data;
+
+    @Schema(description = "Indicador de sucesso")
+    private Boolean success;
+
+    public static Response success(int status, String message, String path, Object data) {
+        return Response.builder()
+                .timestamp(Instant.now())
+                .status(status)
+                .message(message)
+                .path(sanitizePath(path))
+                .data(data)
+                .success(true)
+                .errors(new HashMap<>())
+                .build();
+    }
+
+    public static Response success(String message) {
+        return success(200, message, null, null);
+    }
+
+    public static Response success(Object data) {
+        return success(200, null, null, data);
+    }
+
+    public static Response success(String message, Object data) {
+        return success(200, message, null, data);
+    }
+
+    public static Response error(int status, String error, String message, String path, Map<String, String> errors, Object data) {
+        return Response.builder()
+                .timestamp(Instant.now())
+                .status(status)
+                .error(error)
+                .message(message)
+                .path(sanitizePath(path))
+                .errors(errors != null ? errors : new HashMap<>())
+                .data(data)
+                .success(false)
+                .build();
+    }
+
+    public static Response error(int status, String error, String message, String path) {
+        return error(status, error, message, path, new HashMap<>(), null);
+    }
+
+    public static Response validationError(String message, String path, Map<String, String> validationErrors) {
+        return error(400, "Validation Error", message, path, validationErrors, null);
+    }
+
+    public static Response internalServerError(String message, String path) {
+        return error(500, "Internal Server Error", message, path);
+    }
+
+    public static Response unauthorizedError(String message, String path) {
+        return error(401, "Unauthorized", message, path);
+    }
+
+    public static Response forbiddenError(String message, String path) {
+        return error(403, "Forbidden", message, path);
+    }
+
+
+    public static Response notFoundError(String message, String path) {
+        return error(404, "Not found.", message, path);
+    }
+
+    private static String sanitizePath(String path) {
+        if (path == null) return null;
+        return path.replace("uri=", "").trim();
+    }
+}
