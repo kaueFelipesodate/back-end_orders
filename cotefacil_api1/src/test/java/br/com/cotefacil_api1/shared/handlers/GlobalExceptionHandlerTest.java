@@ -1,7 +1,6 @@
 package br.com.cotefacil_api1.shared.handlers;
 
 import br.com.cotefacil_api1.shared.exceptions.ServiceException;
-import br.com.cotefacil_api1.shared.web.responses.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.access.AccessDeniedException;

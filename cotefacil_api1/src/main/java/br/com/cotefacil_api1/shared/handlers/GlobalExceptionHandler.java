@@ -270,7 +270,7 @@ public class GlobalExceptionHandler {
 
         String path = request.getRequestURI();
         Response response = Response.internalServerError(
-                "Internal server error",
+                "Internal server error: " + ex.getMessage(),
                 path
         );
 
@@ -284,7 +284,7 @@ public class GlobalExceptionHandler {
 
         String path = request.getRequestURI();
         Response response = Response.internalServerError(
-                "Unexpected server error",
+                "Unexpected server error: " + ex.getMessage(),
                 path
         );
 

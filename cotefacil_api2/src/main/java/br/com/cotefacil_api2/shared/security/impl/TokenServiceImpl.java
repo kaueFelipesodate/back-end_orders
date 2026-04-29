@@ -1,6 +1,6 @@
-package br.com.cotefacil_api2.shared.security;
+package br.com.cotefacil_api2.shared.security.impl;
 
-import br.com.cotefacil_api2.shared.exceptions.ServiceException;
+import br.com.cotefacil_api2.shared.security.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.function.Function;
 
 @Service

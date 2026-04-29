@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "CoteFacil API 2",
                 version = "1.0.0",
-                description = "CRUD de pedidos e itens",
+                description = "CRUD of orders and items",
                 contact = @Contact(name = "CoteFacil")
         ),
         servers = {

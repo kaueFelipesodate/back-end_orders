@@ -1,11 +1,10 @@
 package br.com.cotefacil_api1.shared.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -23,7 +22,6 @@ public class Api2ClientConfig {
 
             @Override
             public void handleError(ClientHttpResponse response) {
-                // Intentionally no-op: proxy must relay API 2 error responses as-is.
             }
         });
         return restTemplate;

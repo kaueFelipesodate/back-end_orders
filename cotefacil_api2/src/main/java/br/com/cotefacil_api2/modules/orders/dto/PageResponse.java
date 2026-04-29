@@ -16,24 +16,24 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Resposta paginada de pedidos")
+@Schema(description = "Paged response to orders")
 public class PageResponse<T> {
 
-    @Schema(description = "Lista de itens da pagina")
+    @Schema(description = "List of items on the page")
     private List<T> list;
-    @Schema(description = "Tamanho da pagina")
+    @Schema(description = "Page size")
     private int sizePage;
-    @Schema(description = "Pagina atual")
+    @Schema(description = "Current page")
     private int currentPage;
-    @Schema(description = "Total de paginas")
+    @Schema(description = "Total number of pages")
     private int totalPages;
-    @Schema(description = "Total de itens")
+    @Schema(description = "Total number of items")
     private long totalItems;
-    @Schema(description = "Campo de ordenacao")
+    @Schema(description = "Sorting field")
     private String orderBy;
-    @Schema(description = "Direcao de ordenacao")
+    @Schema(description = "Ordering direction")
     private String orderDir;
-    @Schema(description = "Filtros aplicados")
+    @Schema(description = "Filters applied")
     private Map<String, String> filters;
 
     public static <T> PageResponse<T> fromPage(Page<T> page, PageRequestParams params) {

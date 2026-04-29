@@ -84,7 +84,7 @@ public class OrderApiClientImpl implements OrderApiClient {
             }
         }
 
-        return builder.build().toUri();
+        return builder.build().encode().toUri();
     }
 
     private URI buildUri(String path) {

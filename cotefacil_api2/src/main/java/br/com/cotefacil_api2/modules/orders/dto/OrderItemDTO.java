@@ -3,6 +3,7 @@ package br.com.cotefacil_api2.modules.orders.dto;
 import br.com.cotefacil_api2.modules.orders.model.OrderItem;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,10 +39,21 @@ public class OrderItemDTO {
     @Schema(description = "Unit price", example = "10.50")
     @NotNull(message = "Unit price is required.")
     @DecimalMin(value = "0.01", message = "Unit price must be greater than zero.")
+    @Digits(
+            integer = 17,
+            fraction = 2,
+            message = "Unit price must have up to 17 integer digits and 2 decimal places."
+    )
     private BigDecimal unitPrice;
 
     @Schema(description = "Item subtotal", example = "21.00")
     @DecimalMin(value = "0.00", message = "Subtotal cannot be negative.")
+    @NotNull(message = "Subtotal is required.")
+    @Digits(
+            integer = 17,
+            fraction = 2,
+            message = "Subtotal must have up to 17 integer digits and 2 decimal places."
+    )
     private BigDecimal subtotal = BigDecimal.ZERO;
 
     public static OrderItemDTO toDTO(OrderItem entity) {

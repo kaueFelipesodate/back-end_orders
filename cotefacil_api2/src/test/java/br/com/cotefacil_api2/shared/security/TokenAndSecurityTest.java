@@ -1,6 +1,6 @@
 package br.com.cotefacil_api2.shared.security;
 
-import br.com.cotefacil_api2.modules.orders.enums.OrderStatus;
+import br.com.cotefacil_api2.shared.security.impl.TokenServiceImpl;
 import br.com.cotefacil_api2.shared.web.interceptors.SecurityAccessInterceptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

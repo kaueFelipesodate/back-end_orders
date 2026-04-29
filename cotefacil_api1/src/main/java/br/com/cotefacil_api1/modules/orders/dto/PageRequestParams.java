@@ -1,38 +1,38 @@
 package br.com.cotefacil_api1.modules.orders.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Parametros de paginacao e filtros")
+@Schema(description = "Pagination parameters and filters")
 public class PageRequestParams {
 
     @Builder.Default
-    @Schema(description = "Pagina atual", example = "1")
+    @Schema(description = "Current page", example = "1")
     private Integer page = 1;
 
     @Builder.Default
-    @Schema(description = "Tamanho da pagina", example = "20")
+    @Schema(description = "Page size", example = "20")
     private Integer size = 20;
 
-    @Schema(description = "Campo de ordenacao", example = "createdDate")
+    @Schema(description = "Sorting field", example = "createdDate")
     private String orderBy;
 
-    @Schema(description = "Direcao de ordenacao", example = "DESC")
+    @Schema(description = "Ordering direction", example = "DESC")
     private String orderDir;
 
     @Builder.Default
-    @Schema(description = "Filtros adicionais")
-    private Map<String, String> filters = Collections.emptyMap();
+    @Schema(description = "Additional filters")
+    private Map<String, String> filters = new HashMap<>();
 
     public int resolvePage() {
         if (page == null || page < 1) return 1;

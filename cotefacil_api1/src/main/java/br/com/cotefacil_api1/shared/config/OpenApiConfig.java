@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "CoteFacil API 1",
                 version = "1.0.0",
-                description = "Gateway de autenticacao e proxy de pedidos",
+                description = "Authentication gateway and request proxy",
                 contact = @Contact(name = "CoteFacil")
         ),
         servers = {

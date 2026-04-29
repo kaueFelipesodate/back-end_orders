@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 @Data
@@ -19,31 +17,31 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Schema(description = "Envelope padrao de resposta da API 1")
+@Schema(description = "Standard API response envelope")
 public class Response {
 
-    @Schema(description = "Momento da resposta")
+    @Schema(description = "Response time")
     private Instant timestamp;
 
-    @Schema(description = "Codigo HTTP")
+    @Schema(description = "Code HTTP")
     private int status;
 
-    @Schema(description = "Tipo de erro")
+    @Schema(description = "Error type")
     private String error;
 
-    @Schema(description = "Mensagem da resposta")
+    @Schema(description = "Reply message")
     private String message;
 
-    @Schema(description = "Caminho da requisicao")
+    @Schema(description = "Request path")
     private String path;
 
-    @Schema(description = "Erros de validacao")
+    @Schema(description = "Validation errors")
     private Map<String, String> errors = new HashMap<>();
 
-    @Schema(description = "Dados retornados")
+    @Schema(description = "Data returned")
     private Object data;
 
-    @Schema(description = "Indicador de sucesso")
+    @Schema(description = "Success indicator")
     private Boolean success;
 
     public static Response success(int status, String message, String path, Object data) {

@@ -76,37 +76,30 @@ public final class FilterSpecBuilder {
         }
         if (Boolean.class.equals(type) || boolean.class.equals(type)) {
             Boolean value = parseBoolean(rawValue);
-            if (value == null) return null;
             return cb.equal(path, value);
         }
         if (Number.class.isAssignableFrom(type) || type.isPrimitive()) {
             Number number = parseNumber(rawValue, type);
-            if (number == null) return null;
             return cb.equal(path, number);
         }
         if (type.isEnum()) {
             Object enumValue = parseEnum(rawValue, type);
-            if (enumValue == null) return null;
             return cb.equal(path, enumValue);
         }
         if (LocalDate.class.equals(type)) {
             LocalDate date = parseLocalDate(rawValue);
-            if (date == null) return null;
             return cb.equal(path, date);
         }
         if (LocalDateTime.class.equals(type)) {
             LocalDateTime dateTime = parseLocalDateTime(rawValue);
-            if (dateTime == null) return null;
             return cb.equal(path, dateTime);
         }
         if (Instant.class.equals(type)) {
             Instant instant = parseInstant(rawValue);
-            if (instant == null) return null;
             return cb.equal(path, instant);
         }
         if (OffsetDateTime.class.equals(type)) {
             OffsetDateTime offset = parseOffsetDateTime(rawValue);
-            if (offset == null) return null;
             return cb.equal(path, offset);
         }
         return cb.like(cb.lower(path.as(String.class)), "%" + rawValue.toLowerCase() + "%");
@@ -137,8 +130,7 @@ public final class FilterSpecBuilder {
 
     private static Object parseEnum(String raw, Class<?> type) {
         try {
-            @SuppressWarnings("unchecked")
-            Class<? extends Enum> enumType = (Class<? extends Enum>) type;
+            @SuppressWarnings("unchecked") Class<? extends Enum> enumType = (Class<? extends Enum>) type;
             return Enum.valueOf(enumType, raw.trim().toUpperCase());
         } catch (Exception ignored) {
             return null;

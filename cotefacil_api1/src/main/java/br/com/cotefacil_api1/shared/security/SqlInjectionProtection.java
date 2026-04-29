@@ -11,7 +11,19 @@ import java.util.regex.Pattern;
 @Component
 public class SqlInjectionProtection {
 
-    private static final List<Pattern> SQL_INJECTION_PATTERNS = Arrays.asList(Pattern.compile("('|(\\-\\-)|(;)|(\\|)|(\\*)|(%))", Pattern.CASE_INSENSITIVE), Pattern.compile("(union|select|insert|delete|update|drop|create|alter|exec|execute)", Pattern.CASE_INSENSITIVE), Pattern.compile("(script|javascript|vbscript|onload|onerror|onclick)", Pattern.CASE_INSENSITIVE), Pattern.compile("(<|>|&lt;|&gt;)", Pattern.CASE_INSENSITIVE), Pattern.compile("(\\bor\\b|\\band\\b)\\s*\\d+\\s*=\\s*\\d+", Pattern.CASE_INSENSITIVE), Pattern.compile("(\\bor\\b|\\band\\b)\\s*['\"]\\s*['\"]", Pattern.CASE_INSENSITIVE));
+    private static final List<Pattern> SQL_INJECTION_PATTERNS = Arrays.asList(
+            Pattern.compile("('|(\\-\\-)|(;)|(\\|)|(\\*)|(%))", Pattern.CASE_INSENSITIVE),
+
+            Pattern.compile("\\b(union|select|insert|delete|update|drop|create|alter|exec|execute)\\b", Pattern.CASE_INSENSITIVE),
+
+            Pattern.compile("\\b(script|javascript|vbscript|onload|onerror|onclick)\\b", Pattern.CASE_INSENSITIVE),
+
+            Pattern.compile("(<|>|&lt;|&gt;)", Pattern.CASE_INSENSITIVE),
+
+            Pattern.compile("(\\bor\\b|\\band\\b)\\s*\\d+\\s*=\\s*\\d+", Pattern.CASE_INSENSITIVE),
+
+            Pattern.compile("(\\bor\\b|\\band\\b)\\s*['\"]\\s*['\"]", Pattern.CASE_INSENSITIVE)
+    );
 
     private static final String[] DANGEROUS_CHARS = {"'", "\"", ";", "--", "/*", "*/", "xp_", "sp_", "\\", "<", ">", "&", "|"};
 

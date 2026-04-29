@@ -7,9 +7,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,6 +48,7 @@ public class OrderDTO {
 
     @Schema(description = "Order date", example = "02/12/2025 10:30:00")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
+    @PastOrPresent(message = "Order date cannot be in the future.")
     private LocalDateTime orderDate;
 
     @Schema(description = "Order status", example = "PENDING")
@@ -57,7 +60,13 @@ public class OrderDTO {
     private List<OrderItemDTO> items = new ArrayList<>();
 
     @Schema(description = "Total order value", example = "20.50")
+    @NotNull(message = "Total amount is required.")
     @DecimalMin(value = "0.00", message = "Total amount cannot be negative.")
+    @Digits(
+            integer = 17,
+            fraction = 2,
+            message = "Total amount must have up to 17 integer digits and 2 decimal places."
+    )
     private BigDecimal totalAmount = BigDecimal.ZERO;
 
     public static OrderDTO toDTO(Order entity) {

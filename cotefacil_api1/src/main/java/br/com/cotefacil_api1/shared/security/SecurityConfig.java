@@ -84,8 +84,6 @@ public class SecurityConfig {
                 .filter(origin -> !origin.isBlank())
                 .toList());
 
-        origins.add("http://localhost:3000");
-
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(origins);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
